@@ -18,18 +18,14 @@ int main() {
     for(int i=0;i<N;i++){
         cin >> A[i].first >> A[i].second;
     }
-    int cost[N];
-    sort(A,A+N,[](pair<int,int>a,pair<int,int>b){
-        return (float)a.first/a.second < (float)b.first/b.second;
-    })
-    int AllMp=0;
-    while(H>=0){
-        AllMp+=A[0].second;
-        H-=A[0].first;
-        if(H-A[0].first<0){
-            
+    
+    vector<long long>ans(H+100,INFINITY);
+    for(int HP=0;HP<H+100;HP++){
+        for(int j=0;j<N;j++){
+            ans[HP+A[j].first]=min(ans[HP+A[j].first],ans[HP]+A[j].second);
+            cout << "HP = "<< HP <<" HP+A[j].first = " << HP+A[j].first <<  " ans[HP]+A[j].second = "<<ans[HP]+A[j].second<< endl; 
         }
     }
-
+    cout << ans[H] << endl;
     return 0;
 }
